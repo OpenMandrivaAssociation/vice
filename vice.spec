@@ -1,36 +1,34 @@
 %define	name	vice
-%define version 1.20
-%define rel	2
+%define version 1.21
+%define rel	1
 %define release %mkrel %{rel}
 
 Summary:	VICE, the Versatile Commodore Emulator
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
-License:	GPL
+License:	GPLv2
 Group:		Emulators
-Source0:	ftp://ftp.funet.fi/pub/cbm/crossplatform/emulators/VICE/%{name}-%{version}.tar.bz2
+Source0:	ftp://ftp.funet.fi/pub/cbm/crossplatform/emulators/VICE/%{name}-%{version}.tar.gz
 Source1:	vice-normalicons.tar.bz2
 Source2:	vice-largeicons.tar.bz2
 Source3:	vice-miniicons.tar.bz2
+# From Pier Luigi Pau via Debian bug #418295, fixes a bug triggered
+# with an X.org security update
+Patch0:		vice-1.21-libx11.patch
 URL:		http://www.viceteam.org/
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	readline-devel
 BuildRequires:	libgnomeui2-devel
 BuildRequires:  ffmpeg-devel
 BuildRequires:  libalsa-devel
 BuildRequires:  libopencbm-devel
 BuildRequires:	flex
-BuildRequires:  automake1.7
-%if %mdkversion >= 200610
-BuildRequires: mkfontdir bdftopcf
-BuildRequires: libxt-devel
-%else
-BuildRequires:  XFree86
-%endif
-Requires(post): desktop-file-utils
-Requires(postun): desktop-file-utils
-
+BuildRequires:	mkfontdir bdftopcf
+BuildRequires:	libxt-devel
+Requires(post):	desktop-file-utils
+Requires(postun):	desktop-file-utils
+Requires(post):	info-install
+Requires(postun):	info-install
 
 %description
 VICE is a set of accurate emulators for the Commodore 64, 128, VIC20,
@@ -39,6 +37,7 @@ System.
 
 %prep
 %setup -q
+%patch0 -p1 -b .libx11
 
 %build
 export CFLAGS="$RPM_OPT_FLAGS -DNO_REGPARM" 
@@ -52,18 +51,6 @@ export CFLAGS="$RPM_OPT_FLAGS -DNO_REGPARM"
 %install
 rm -rf $RPM_BUILD_ROOT
 %makeinstall_std
-#install menu
-mkdir -p $RPM_BUILD_ROOT%{_menudir}
-cat >$RPM_BUILD_ROOT%{_menudir}/vice << EOF
-?package(vice):command="%{_bindir}/x64" needs="X11" icon="c64icon.png" section="More Applications/Emulators" title="C64 Emulator" longtitle="Commodore 64 Emulator" 	mimetypes="application/x-d64,application/x-t64,application/x-x64" xdg="true"
-?package(vice):command="%{_bindir}/x128" needs="X11" icon="c128icon.png" section="More Applications/Emulators" title="C128 Emulator" longtitle="Commodore 128 Emulator" mimetypes="application/x-d64,application/x-t64,application/x-x64" xdg="true"
-?package(vice):command="%{_bindir}/xpet" needs="X11" icon="peticon.png" section="More Applications/Emulators" title="PET Emulator" longtitle="Commodore PET Emulator" mimetypes="application/x-d64,application/x-t64,application/x-x64" xdg="true"
-?package(vice):command="%{_bindir}/xvic" needs="X11" icon="vic20icon.png" section="More Applications/Emulators" title="VIC 20 Emulator" longtitle="Commodore VIC 20 Emulator" mimetypes="application/x-d64,application/x-t64,application/x-x64" xdg="true"
-?package(vice):command="%{_bindir}/xcbm2" needs="X11" icon="c610icon.png" section="More Applications/Emulators" title="CBM2 Emulator" longtitle="Commodore BM 2 Emulator" mimetypes="application/x-d64,application/x-t64,application/x-x64" xdg="true"
-?package(vice):command="%{_bindir}/xplus4" needs="X11" icon="plus4icon.png" section="More Applications/Emulators" title="CPLUS4 Emulator" longtitle="Commodore PLUS4 Emulator" mimetypes="application/x-d64,application/x-t64,application/x-x64" xdg="true"
-?package(vice):command="xvt -e %{_bindir}/c1541" needs="X11" icon="commodore.png" section="More Applications/Emulators" title="VICE disk image tool" longtitle="C1541 stand alone disk image maintenance program" xdg="true"
-?package(vice):command="%{_bindir}/vsid" needs="X11" icon="commodore.png" section="Multimedia/Sound" title="VSID music player" longtitle="VICE SID music player for Commodore tunes" xdg="true"
-EOF
 #xdg menu
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-x64.desktop << EOF
@@ -77,7 +64,7 @@ Terminal=false
 Type=Application
 MimeType=application/x-d64;application/x-t64;application/x-x64;
 StartupNotify=true
-Categories=GNOME;GTK;X-MandrivaLinux-MoreApplications-Emulators;Emulator;
+Categories=GNOME;GTK;Emulator;
 EOF
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-x128.desktop << EOF
 [Desktop Entry]
@@ -90,7 +77,7 @@ Terminal=false
 Type=Application
 MimeType=application/x-d64;application/x-t64;application/x-x64;
 StartupNotify=true
-Categories=GNOME;GTK;X-MandrivaLinux-MoreApplications-Emulators;Emulator;
+Categories=GNOME;GTK;Emulator;
 EOF
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-xpet.desktop << EOF
 [Desktop Entry]
@@ -103,7 +90,7 @@ Terminal=false
 Type=Application
 MimeType=application/x-d64;application/x-t64;application/x-x64;
 StartupNotify=true
-Categories=GNOME;GTK;X-MandrivaLinux-MoreApplications-Emulators;Emulator;
+Categories=GNOME;GTK;Emulator;
 EOF
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-xvic.desktop << EOF
 [Desktop Entry]
@@ -116,7 +103,7 @@ Terminal=false
 Type=Application
 MimeType=application/x-d64;application/x-t64;application/x-x64;
 StartupNotify=true
-Categories=GNOME;GTK;X-MandrivaLinux-MoreApplications-Emulators;Emulator;
+Categories=GNOME;GTK;Emulator;
 EOF
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-xcbm2.desktop << EOF
 [Desktop Entry]
@@ -129,7 +116,7 @@ Terminal=false
 Type=Application
 MimeType=application/x-d64;application/x-t64;application/x-x64;
 StartupNotify=true
-Categories=GNOME;GTK;X-MandrivaLinux-MoreApplications-Emulators;Emulator;
+Categories=GNOME;GTK;Emulator;
 EOF
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-xplus4.desktop << EOF
 [Desktop Entry]
@@ -142,7 +129,7 @@ Terminal=false
 Type=Application
 MimeType=application/x-d64;application/x-t64;application/x-x64;
 StartupNotify=true
-Categories=GNOME;GTK;X-MandrivaLinux-MoreApplications-Emulators;Emulator;
+Categories=GNOME;GTK;Emulator;
 EOF
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-c1541.desktop << EOF
 [Desktop Entry]
@@ -154,7 +141,7 @@ Icon=commodore
 Terminal=true
 Type=Application
 StartupNotify=true
-Categories=X-MandrivaLinux-MoreApplications-Emulators;Emulator;
+Categories=Emulator;
 EOF
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-vsid.desktop << EOF
 [Desktop Entry]
@@ -166,17 +153,15 @@ Icon=commodore
 Terminal=false
 Type=Application
 StartupNotify=true
-Categories=GNOME;GTK;X-MandrivaLinux-Multimedia-Sound;Audio;Player;
+Categories=GNOME;GTK;Audio;Player;
 EOF
 
 
 #install icons
-mkdir -p $RPM_BUILD_ROOT%{_iconsdir}
-tar xjf %{SOURCE1} -C $RPM_BUILD_ROOT%{_iconsdir}
-mkdir -p $RPM_BUILD_ROOT%{_liconsdir}
-tar xjf %{SOURCE2} -C $RPM_BUILD_ROOT%{_liconsdir}
-mkdir -p $RPM_BUILD_ROOT%{_miconsdir}
-tar xjf %{SOURCE3} -C $RPM_BUILD_ROOT%{_miconsdir}
+mkdir -p $RPM_BUILD_ROOT%{_iconsdir}/hicolor/{16x16,32x32,48x48}/apps
+tar xjf %{SOURCE1} -C $RPM_BUILD_ROOT%{_iconsdir}/hicolor/32x32/apps
+tar xjf %{SOURCE2} -C $RPM_BUILD_ROOT%{_iconsdir}/hicolor/48x48/apps
+tar xjf %{SOURCE3} -C $RPM_BUILD_ROOT%{_iconsdir}/hicolor/16x16/apps
 
 %find_lang %{name}
 
@@ -201,9 +186,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/*
 %{_infodir}/*info*
 %_datadir/applications/mandriva-*
-%{_menudir}/vice
-%{_miconsdir}/*.png
-%{_iconsdir}/*.png
-%{_liconsdir}/*.png
-
+%{_iconsdir}/hicolor/*/apps/*.png
 
