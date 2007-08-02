@@ -17,6 +17,7 @@ Source3:	vice-miniicons.tar.bz2
 # with an X.org security update
 Patch0:		vice-1.21-libx11.patch
 URL:		http://www.viceteam.org/
+BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	readline-devel
 BuildRequires:	libgnomeui2-devel
 BuildRequires:  ffmpeg-devel
