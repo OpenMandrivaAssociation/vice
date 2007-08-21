@@ -29,7 +29,7 @@ BuildRequires:	libxt-devel
 Requires(post):	desktop-file-utils
 Requires(postun):	desktop-file-utils
 Requires(post):	info-install
-Requires(postun):	info-install
+Requires(preun):	info-install
 
 %description
 VICE is a set of accurate emulators for the Commodore 64, 128, VIC20,
@@ -174,8 +174,10 @@ rm -rf $RPM_BUILD_ROOT
 %update_desktop_database
 %{update_menus}
 
-%postun
+%preun
 %_remove_install_info vice.info
+
+%postun
 %clean_desktop_database
 %{clean_menus}
 
