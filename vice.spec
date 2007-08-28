@@ -56,7 +56,6 @@ rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-x64.desktop << EOF
 [Desktop Entry]
-Encoding=UTF-8
 Name=C64 Emulator
 Comment=Commodore 64 Emulator
 Exec=%{_bindir}/x64 %U
@@ -69,7 +68,6 @@ Categories=GNOME;GTK;Emulator;
 EOF
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-x128.desktop << EOF
 [Desktop Entry]
-Encoding=UTF-8
 Name=C128 Emulator
 Comment=Commodore 128 Emulator
 Exec=%{_bindir}/x128 %U
@@ -82,7 +80,6 @@ Categories=GNOME;GTK;Emulator;
 EOF
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-xpet.desktop << EOF
 [Desktop Entry]
-Encoding=UTF-8
 Name=PET Emulator
 Comment=Commodore PET Emulator
 Exec=%{_bindir}/xpet %U
@@ -95,7 +92,6 @@ Categories=GNOME;GTK;Emulator;
 EOF
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-xvic.desktop << EOF
 [Desktop Entry]
-Encoding=UTF-8
 Name=VIC 20 Emulator
 Comment=Commodore VIC 20 Emulator
 Exec=%{_bindir}/xvic %U
@@ -108,7 +104,6 @@ Categories=GNOME;GTK;Emulator;
 EOF
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-xcbm2.desktop << EOF
 [Desktop Entry]
-Encoding=UTF-8
 Name=CBM2 Emulator
 Comment=Commodore BM 2 Emulator
 Exec=%{_bindir}/xcbm2 %U
@@ -121,7 +116,6 @@ Categories=GNOME;GTK;Emulator;
 EOF
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-xplus4.desktop << EOF
 [Desktop Entry]
-Encoding=UTF-8
 Name=CPLUS4 Emulator
 Comment=Commodore PLUS4 Emulator
 Exec=%{_bindir}/xplus4 %U
@@ -134,7 +128,6 @@ Categories=GNOME;GTK;Emulator;
 EOF
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-c1541.desktop << EOF
 [Desktop Entry]
-Encoding=UTF-8
 Name=VICE disk image tool
 Comment=C1541 stand alone disk image maintenance program
 Exec=%{_bindir}/c1541 %U
@@ -146,7 +139,6 @@ Categories=Emulator;
 EOF
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-vsid.desktop << EOF
 [Desktop Entry]
-Encoding=UTF-8
 Name=VSID music player
 Comment=VICE SID music player for Commodore tunes
 Exec=%{_bindir}/vsid %U
