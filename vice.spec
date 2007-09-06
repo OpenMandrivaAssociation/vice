@@ -1,6 +1,6 @@
 %define	name	vice
 %define version 1.22
-%define rel	1
+%define rel	2
 %define release %mkrel %{rel}
 
 Summary:	VICE, the Versatile Commodore Emulator
@@ -28,6 +28,7 @@ BuildRequires:	libxxf86dga-devel
 BuildRequires:	flex
 BuildRequires:	mkfontdir bdftopcf
 BuildRequires:	libxt-devel
+BuildRequires:	gettext-devel
 Requires(post):	desktop-file-utils
 Requires(postun):	desktop-file-utils
 Requires(post):	info-install
