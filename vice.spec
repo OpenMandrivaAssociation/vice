@@ -1,6 +1,6 @@
 %define	name	vice
-%define version 1.21
-%define rel	2
+%define version 1.22
+%define rel	1
 %define release %mkrel %{rel}
 
 Summary:	VICE, the Versatile Commodore Emulator
@@ -13,16 +13,18 @@ Source0:	ftp://ftp.funet.fi/pub/cbm/crossplatform/emulators/VICE/%{name}-%{versi
 Source1:	vice-normalicons.tar.bz2
 Source2:	vice-largeicons.tar.bz2
 Source3:	vice-miniicons.tar.bz2
-# From Pier Luigi Pau via Debian bug #418295, fixes a bug triggered
-# with an X.org security update
-Patch0:		vice-1.21-libx11.patch
 URL:		http://www.viceteam.org/
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	readline-devel
+BuildRequires:	libncurses-devel
 BuildRequires:	libgnomeui2-devel
+BuildRequires:	libungif-devel
 BuildRequires:  ffmpeg-devel
 BuildRequires:  libalsa-devel
 BuildRequires:  libopencbm-devel
+BuildRequires:	libxv-devel
+BuildRequires:	libxxf86vm-devel
+BuildRequires:	libxxf86dga-devel
 BuildRequires:	flex
 BuildRequires:	mkfontdir bdftopcf
 BuildRequires:	libxt-devel
@@ -38,7 +40,6 @@ System.
 
 %prep
 %setup -q
-%patch0 -p1 -b .libx11
 
 %build
 export CFLAGS="$RPM_OPT_FLAGS -DNO_REGPARM" 
@@ -146,7 +147,7 @@ Icon=commodore
 Terminal=false
 Type=Application
 StartupNotify=true
-Categories=GNOME;GTK;Audio;Player;
+Categories=Audio;Player;
 EOF
 
 
