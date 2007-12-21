@@ -14,6 +14,7 @@ Source1:	vice-normalicons.tar.bz2
 Source2:	vice-largeicons.tar.bz2
 Source3:	vice-miniicons.tar.bz2
 URL:		http://www.viceteam.org/
+BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	readline-devel
 BuildRequires:	libncurses-devel
 BuildRequires:	libgnomeui2-devel
