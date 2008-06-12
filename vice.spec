@@ -165,15 +165,19 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 %_install_info vice.info
+%if %mdkversion < 200900
 %update_desktop_database
 %{update_menus}
+%endif
 
 %preun
 %_remove_install_info vice.info
 
+%if %mdkversion < 200900
 %postun
 %clean_desktop_database
 %{clean_menus}
+%endif
 
 %files -f %{name}.lang
 %defattr(-,root,root)
