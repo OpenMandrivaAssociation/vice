@@ -1,7 +1,6 @@
 %define	name	vice
-%define version 1.22
-%define rel	2
-%define release %mkrel %{rel}
+%define version 2.0
+%define release %mkrel 1
 
 Summary:	VICE, the Versatile Commodore Emulator
 Name:		%{name}
@@ -9,7 +8,7 @@ Version:	%{version}
 Release:	%{release}
 License:	GPLv2
 Group:		Emulators
-Source0:	ftp://ftp.funet.fi/pub/cbm/crossplatform/emulators/VICE/%{name}-%{version}.tar.gz
+Source0:	http://www.zimmers.net/anonftp/pub/cbm/crossplatform/emulators/VICE/%{name}-%{version}.tar.gz
 Source1:	vice-normalicons.tar.bz2
 Source2:	vice-largeicons.tar.bz2
 Source3:	vice-miniicons.tar.bz2
@@ -22,9 +21,8 @@ BuildRequires:	libungif-devel
 BuildRequires:  ffmpeg-devel
 BuildRequires:  libalsa-devel
 BuildRequires:  libopencbm-devel
-BuildRequires:	libxv-devel
+BuildRequires:	gtkglext-devel
 BuildRequires:	libxxf86vm-devel
-BuildRequires:	libxxf86dga-devel
 BuildRequires:	flex
 BuildRequires:	mkfontdir bdftopcf
 BuildRequires:	libxt-devel
