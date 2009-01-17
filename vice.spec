@@ -12,6 +12,7 @@ Source0:	http://www.zimmers.net/anonftp/pub/cbm/crossplatform/emulators/VICE/%{n
 Source1:	vice-normalicons.tar.bz2
 Source2:	vice-largeicons.tar.bz2
 Source3:	vice-miniicons.tar.bz2
+Patch0:		vice-2.1-fix-str-fmt.patch
 URL:		http://www.viceteam.org/
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	readline-devel
@@ -39,6 +40,7 @@ System.
 
 %prep
 %setup -q
+%patch0
 
 %build
 export CFLAGS="$RPM_OPT_FLAGS -DNO_REGPARM" 
@@ -50,11 +52,11 @@ export CFLAGS="$RPM_OPT_FLAGS -DNO_REGPARM"
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 %makeinstall_std
 #xdg menu
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
-cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-x64.desktop << EOF
+mkdir -p %{buildroot}%{_datadir}/applications
+cat > %{buildroot}%{_datadir}/applications/mandriva-x64.desktop << EOF
 [Desktop Entry]
 Name=C64 Emulator
 Comment=Commodore 64 Emulator
@@ -66,7 +68,7 @@ MimeType=application/x-d64;application/x-t64;application/x-x64;
 StartupNotify=true
 Categories=GNOME;GTK;Emulator;
 EOF
-cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-x128.desktop << EOF
+cat > %{buildroot}%{_datadir}/applications/mandriva-x128.desktop << EOF
 [Desktop Entry]
 Name=C128 Emulator
 Comment=Commodore 128 Emulator
@@ -78,7 +80,7 @@ MimeType=application/x-d64;application/x-t64;application/x-x64;
 StartupNotify=true
 Categories=GNOME;GTK;Emulator;
 EOF
-cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-xpet.desktop << EOF
+cat > %{buildroot}%{_datadir}/applications/mandriva-xpet.desktop << EOF
 [Desktop Entry]
 Name=PET Emulator
 Comment=Commodore PET Emulator
@@ -90,7 +92,7 @@ MimeType=application/x-d64;application/x-t64;application/x-x64;
 StartupNotify=true
 Categories=GNOME;GTK;Emulator;
 EOF
-cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-xvic.desktop << EOF
+cat > %{buildroot}%{_datadir}/applications/mandriva-xvic.desktop << EOF
 [Desktop Entry]
 Name=VIC 20 Emulator
 Comment=Commodore VIC 20 Emulator
@@ -102,7 +104,7 @@ MimeType=application/x-d64;application/x-t64;application/x-x64;
 StartupNotify=true
 Categories=GNOME;GTK;Emulator;
 EOF
-cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-xcbm2.desktop << EOF
+cat > %{buildroot}%{_datadir}/applications/mandriva-xcbm2.desktop << EOF
 [Desktop Entry]
 Name=CBM2 Emulator
 Comment=Commodore BM 2 Emulator
@@ -114,7 +116,7 @@ MimeType=application/x-d64;application/x-t64;application/x-x64;
 StartupNotify=true
 Categories=GNOME;GTK;Emulator;
 EOF
-cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-xplus4.desktop << EOF
+cat > %{buildroot}%{_datadir}/applications/mandriva-xplus4.desktop << EOF
 [Desktop Entry]
 Name=CPLUS4 Emulator
 Comment=Commodore PLUS4 Emulator
@@ -126,7 +128,7 @@ MimeType=application/x-d64;application/x-t64;application/x-x64;
 StartupNotify=true
 Categories=GNOME;GTK;Emulator;
 EOF
-cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-c1541.desktop << EOF
+cat > %{buildroot}%{_datadir}/applications/mandriva-c1541.desktop << EOF
 [Desktop Entry]
 Name=VICE disk image tool
 Comment=C1541 stand alone disk image maintenance program
@@ -137,7 +139,7 @@ Type=Application
 StartupNotify=true
 Categories=Emulator;
 EOF
-cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-vsid.desktop << EOF
+cat > %{buildroot}%{_datadir}/applications/mandriva-vsid.desktop << EOF
 [Desktop Entry]
 Name=VSID music player
 Comment=VICE SID music player for Commodore tunes
@@ -151,15 +153,15 @@ EOF
 
 
 #install icons
-mkdir -p $RPM_BUILD_ROOT%{_iconsdir}/hicolor/{16x16,32x32,48x48}/apps
-tar xjf %{SOURCE1} -C $RPM_BUILD_ROOT%{_iconsdir}/hicolor/32x32/apps
-tar xjf %{SOURCE2} -C $RPM_BUILD_ROOT%{_iconsdir}/hicolor/48x48/apps
-tar xjf %{SOURCE3} -C $RPM_BUILD_ROOT%{_iconsdir}/hicolor/16x16/apps
+mkdir -p %{buildroot}%{_iconsdir}/hicolor/{16x16,32x32,48x48}/apps
+tar xjf %{SOURCE1} -C %{buildroot}%{_iconsdir}/hicolor/32x32/apps
+tar xjf %{SOURCE2} -C %{buildroot}%{_iconsdir}/hicolor/48x48/apps
+tar xjf %{SOURCE3} -C %{buildroot}%{_iconsdir}/hicolor/16x16/apps
 
 %find_lang %{name}
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %post
 %_install_info vice.info
