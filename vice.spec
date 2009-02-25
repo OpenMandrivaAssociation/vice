@@ -1,6 +1,6 @@
 %define	name	vice
 %define version 2.1
-%define release %mkrel 2
+%define release %mkrel 3
 
 Summary:	VICE, the Versatile Commodore Emulator
 Name:		%{name}
