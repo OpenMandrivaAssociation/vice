@@ -1,6 +1,6 @@
 %define	name	vice
 %define version 2.1
-%define release %mkrel 4
+%define release %mkrel 5
 
 Summary:	VICE, the Versatile Commodore Emulator
 Name:		%{name}
@@ -14,6 +14,7 @@ Source2:	vice-largeicons.tar.bz2
 Source3:	vice-miniicons.tar.bz2
 Patch0:		vice-2.1-fix-str-fmt.patch
 Patch1:		vice-2.1-fix-alsa-fragment.patch
+Patch2:		vice-2.1-elif-without-condition.patch
 URL:		http://www.viceteam.org/
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	readline-devel
@@ -44,6 +45,7 @@ System.
 %setup -q
 %patch0 -p0
 %patch1 -p2
+%patch2 -p1
 
 %build
 export CFLAGS="$RPM_OPT_FLAGS -DNO_REGPARM" 
