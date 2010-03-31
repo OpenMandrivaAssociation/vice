@@ -12,9 +12,6 @@ Source0:	http://www.zimmers.net/anonftp/pub/cbm/crossplatform/emulators/VICE/%{n
 Source1:	vice-normalicons.tar.bz2
 Source2:	vice-largeicons.tar.bz2
 Source3:	vice-miniicons.tar.bz2
-Patch0:		vice-2.1-fix-str-fmt.patch
-Patch1:		vice-2.1-fix-alsa-fragment.patch
-Patch2:		vice-2.1-elif-without-condition.patch
 URL:		http://www.viceteam.org/
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	readline-devel
@@ -23,6 +20,7 @@ BuildRequires:	libgnomeui2-devel
 BuildRequires:	libungif-devel
 BuildRequires:  ffmpeg-devel
 BuildRequires:  libalsa-devel
+#gw TODO: still needed, it is not linked in
 BuildRequires:  libopencbm-devel
 BuildRequires:	gtkglext-devel
 BuildRequires:	libxxf86vm-devel
@@ -43,9 +41,6 @@ System.
 
 %prep
 %setup -q
-# %patch0 -p0
-# %patch1 -p2
-# %patch2 -p1
 
 %build
 export CFLAGS="$RPM_OPT_FLAGS -DNO_REGPARM" 
