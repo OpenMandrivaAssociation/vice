@@ -43,9 +43,9 @@ System.
 
 %prep
 %setup -q
-%patch0 -p0
-%patch1 -p2
-%patch2 -p1
+# %patch0 -p0
+# %patch1 -p2
+# %patch2 -p1
 
 %build
 export CFLAGS="$RPM_OPT_FLAGS -DNO_REGPARM" 
