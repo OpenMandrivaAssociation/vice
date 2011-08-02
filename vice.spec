@@ -1,6 +1,6 @@
 %define	name	vice
-%define version 2.2
-%define release %mkrel 2
+%define version 2.3
+%define release %mkrel 1
 
 Summary:	VICE, the Versatile Commodore Emulator
 Name:		%{name}
@@ -160,24 +160,17 @@ tar xjf %{SOURCE3} -C %{buildroot}%{_iconsdir}/hicolor/16x16/apps
 
 %find_lang %{name}
 
+#gw these are straight conversions of the info document
+rm -f %buildroot%_infodir/*.{txt,pdf}
+
 %clean
 rm -rf %{buildroot}
 
 %post
 %_install_info vice.info
-%if %mdkversion < 200900
-%update_desktop_database
-%{update_menus}
-%endif
 
 %preun
 %_remove_install_info vice.info
-
-%if %mdkversion < 200900
-%postun
-%clean_desktop_database
-%{clean_menus}
-%endif
 
 %files -f %{name}.lang
 %defattr(-,root,root)
@@ -185,7 +178,7 @@ rm -rf %{buildroot}
 %{_bindir}/*
 %{_prefix}/lib/vice
 %{_mandir}/man1/*
-%{_infodir}/*info*
+%{_infodir}/vice.info*
 %_datadir/applications/mandriva-*
 %{_iconsdir}/hicolor/*/apps/*.png
 
