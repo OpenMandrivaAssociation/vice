@@ -20,8 +20,6 @@ BuildRequires:	libgnomeui2-devel
 BuildRequires:	libungif-devel
 BuildRequires:  ffmpeg-devel
 BuildRequires:  libalsa-devel
-#gw TODO: still needed, it is not linked in
-BuildRequires:  libopencbm-devel
 BuildRequires:	gtkglext-devel
 BuildRequires:	libxxf86vm-devel
 BuildRequires:	flex
