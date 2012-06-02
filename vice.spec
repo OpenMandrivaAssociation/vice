@@ -19,6 +19,7 @@ BuildRequires:	SDL-devel
 BuildRequires:	SDL_sound-devel
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(gdkglext-1.0)
+BuildRequires:	pkgconfig(libgnomeui-2.0)
 BuildRequires:	pkgconfig(ncurses)
 BuildRequires:	pkgconfig(xt)
 BuildRequires:	pkgconfig(xxf86vm)
@@ -312,7 +313,6 @@ tar xjf %{SOURCE3} -C %{buildroot}%{_iconsdir}/hicolor/16x16/apps
 %{_prefix}/lib/vice
 %{_mandir}/man1/*
 %{_infodir}/%{name}*
-%{_datadir}/applications/mandriva-*
 %{_iconsdir}/hicolor/*/apps/*.png
 
 %files sdl
