@@ -2,11 +2,11 @@
 
 Summary:	VICE, the Versatile Commodore Emulator
 Name:		vice
-Version:	2.3.14
-Release:	%mkrel 2
+Version:	2.3.18
+Release:	%mkrel 1
 License:	GPLv2
 Group:		Emulators
-Source0:	http://www.zimmers.net/anonftp/pub/cbm/crossplatform/emulators/VICE/%{name}-%{version}.tar.gz
+Source0:	http://www.zimmers.net/anonftp/pub/cbm/crossplatform/emulators/VICE/%{name}-%{version}.tar.bz2
 Source1:	vice-normalicons.tar.bz2
 Source2:	vice-largeicons.tar.bz2
 Source3:	vice-miniicons.tar.bz2
@@ -21,6 +21,7 @@ BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(gdkglext-1.0)
 BuildRequires:	pkgconfig(libgnomeui-2.0)
 BuildRequires:	pkgconfig(ncurses)
+BuildRequires:	pkgconfig(vte)
 BuildRequires:	pkgconfig(xt)
 BuildRequires:	pkgconfig(xxf86vm)
 BuildRequires:	flex
