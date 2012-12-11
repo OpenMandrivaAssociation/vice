@@ -2,26 +2,26 @@
 
 Summary:	VICE, the Versatile Commodore Emulator
 Name:		vice
-Version:	2.3.18
-Release:	%mkrel 1
+Version:	2.4
+Release:	1
 License:	GPLv2
 Group:		Emulators
-Source0:	http://www.zimmers.net/anonftp/pub/cbm/crossplatform/emulators/VICE/%{name}-%{version}.tar.bz2
+URL:		http://www.viceteam.org/
+Source0:	http://sourceforge.net/projects/vice-emu/files/development-releases/%{name}-%{version}.tar.gz
 Source1:	vice-normalicons.tar.bz2
 Source2:	vice-largeicons.tar.bz2
 Source3:	vice-miniicons.tar.bz2
-URL:		http://www.viceteam.org/
 BuildRequires:	gettext-devel
 BuildRequires:	giflib-devel
-BuildRequires:	ffmpeg-devel
+BuildRequires:	ffmpeg0.7-devel
 BuildRequires:	readline-devel
 BuildRequires:	SDL-devel
 BuildRequires:	SDL_sound-devel
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(gdkglext-1.0)
 BuildRequires:	pkgconfig(libgnomeui-2.0)
-BuildRequires:	pkgconfig(ncurses)
 BuildRequires:	pkgconfig(vte)
+BuildRequires:	pkgconfig(ncurses)
 BuildRequires:	pkgconfig(xt)
 BuildRequires:	pkgconfig(xxf86vm)
 BuildRequires:	flex
@@ -75,7 +75,6 @@ make clean
 %make
 
 %install
-%__rm -rf %{buildroot}
 %makeinstall_std
 
 cp sdl/%{_bindir}/*-sdl %{buildroot}%{_bindir}/
@@ -298,20 +297,9 @@ tar xjf %{SOURCE3} -C %{buildroot}%{_iconsdir}/hicolor/16x16/apps
 
 %find_lang %{name}
 
-%clean
-%__rm -rf %{buildroot}
-
-%if %{mdvver} < 201200
-%post
-%_install_info vice.info
-
-%preun
-%_remove_install_info vice.info
-%endif
-
 %files -f %{name}.lang
 %doc AUTHORS FEEDBACK INSTALL README ChangeLog doc/html/plain/*
-%{_prefix}/lib/vice
+%{_libdir}/vice
 %{_mandir}/man1/*
 %{_infodir}/%{name}*
 %{_iconsdir}/hicolor/*/apps/*.png
