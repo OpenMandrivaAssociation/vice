@@ -1,6 +1,6 @@
 %define Werror_cflags %nil
 
-Summary:	VICE, the Versatile Commodore Emulator
+Summary:	, the Versatile Commodore Emulator
 Name:		vice
 Version:	2.4
 Release:	1
