@@ -1,9 +1,9 @@
 %define Werror_cflags %nil
 
-Summary:	, the Versatile Commodore Emulator
+Summary:	The Versatile Commodore Emulator
 Name:		vice
 Version:	2.4
-Release:	1
+Release:	2
 License:	GPLv2
 Group:		Emulators
 URL:		http://www.viceteam.org/
