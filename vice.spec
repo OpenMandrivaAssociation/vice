@@ -3,7 +3,7 @@
 Summary:	VICE, the Versatile Commodore Emulator
 Name:		vice
 Version:	2.4
-Release:	2
+Release:	3
 License:	GPLv2+
 Group:		Emulators
 Url:		http://vice-emu.sourceforge.net/
@@ -11,6 +11,7 @@ Source0:	http://sourceforge.net/projects/vice-emu/files/development-releases/%{n
 Source1:	vice-normalicons.tar.bz2
 Source2:	vice-largeicons.tar.bz2
 Source3:	vice-miniicons.tar.bz2
+Patch0:		vice-2.4-giflib51.patch
 BuildRequires:	bdftopcf
 BuildRequires:	flex
 BuildRequires:	mkfontdir
@@ -76,6 +77,7 @@ GTK set of vice emulators binaries.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 export CFLAGS="%{optflags} -DNO_REGPARM"
