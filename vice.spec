@@ -3,7 +3,7 @@
 Summary:	VICE, the Versatile Commodore Emulator
 Name:		vice
 Version:	2.4
-Release:	3
+Release:	4
 License:	GPLv2+
 Group:		Emulators
 Url:		http://vice-emu.sourceforge.net/
