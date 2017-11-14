@@ -1,30 +1,30 @@
 %define Werror_cflags %nil
+%define _disable_rebuild_configure 1
 
 Summary:	VICE, the Versatile Commodore Emulator
 Name:		vice
-Version:	2.4
-Release:	4
+Version:	3.1
+Release:	1
 License:	GPLv2+
 Group:		Emulators
 Url:		http://vice-emu.sourceforge.net/
-Source0:	http://sourceforge.net/projects/vice-emu/files/development-releases/%{name}-%{version}.tar.gz
+Source0:	https://downloads.sourceforge.net/project/vice-emu/releases/vice-%{version}.tar.gz
 Source1:	vice-normalicons.tar.bz2
 Source2:	vice-largeicons.tar.bz2
 Source3:	vice-miniicons.tar.bz2
-Patch0:		vice-2.4-giflib51.patch
 BuildRequires:	bdftopcf
 BuildRequires:	flex
 BuildRequires:	mkfontdir
 BuildRequires:	gettext-devel
 BuildRequires:	giflib-devel
-BuildRequires:	ffmpeg0.7-devel
+BuildRequires:	ffmpeg-devel
 BuildRequires:	readline-devel
 BuildRequires:	SDL_sound-devel
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(gdkglext-1.0)
 BuildRequires:	pkgconfig(libgnomeui-2.0)
 BuildRequires:	pkgconfig(ncurses)
-BuildRequires:	pkgconfig(sdl)
+BuildRequires:	pkgconfig(sdl2)
 BuildRequires:	pkgconfig(vte)
 BuildRequires:	pkgconfig(xt)
 BuildRequires:	pkgconfig(xxf86vm)
@@ -36,7 +36,7 @@ PET and CBM-II 8-bit computers, all of which run under the X Window
 System.
 
 %files -f %{name}.lang
-%doc AUTHORS FEEDBACK INSTALL README ChangeLog doc/html/plain/*
+%doc AUTHORS FEEDBACK INSTALL README ChangeLog
 %{_libdir}/vice
 %{_mandir}/man1/*
 %{_infodir}/%{name}*
@@ -77,11 +77,24 @@ GTK set of vice emulators binaries.
 
 %prep
 %setup -q
-%patch0 -p1
+%apply_patches
 
 %build
-export CFLAGS="%{optflags} -DNO_REGPARM"
-%configure2_5x --enable-sdlui --enable-fullscreen
+# --disable-option-checking is needed because the configure
+# macro adds --disable-static, --disable-rpath and a few other
+# generic autoconf-isms
+%define common_args \\\
+	--enable-fullscreen \\\
+	--enable-external-ffmpeg \\\
+	--enable-ethernet \\\
+	--disable-arch \\\
+	--with-ui-threads \\\
+	--disable-option-checking
+
+
+%configure \
+	--enable-sdlui2 \
+	%{common_args}
 %make
 
 make install DESTDIR=`pwd`/sdl
@@ -95,13 +108,16 @@ popd
 
 make clean
 
-%configure2_5x --enable-gnomeui --enable-fullscreen
+%configure \
+	--enable-gnomeui \
+	%{common_args}
 %make
 
 %install
 %makeinstall_std
 
-cp sdl/%{_bindir}/*-sdl %{buildroot}%{_bindir}/
+cp sdl%{_bindir}/*-sdl %{buildroot}%{_bindir}/
+cp -af sdl%{_libdir}/vice %{buildroot}%{_libdir}/
 
 #xdg menus
 #============GTK============
