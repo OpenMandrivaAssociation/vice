@@ -3,7 +3,7 @@
 
 Summary:	VICE, the Versatile Commodore Emulator
 Name:		vice
-Version:	3.1
+Version:	3.3
 Release:	1
 License:	GPLv2+
 Group:		Emulators
@@ -22,12 +22,14 @@ BuildRequires:	readline-devel
 BuildRequires:	SDL_sound-devel
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(gdkglext-1.0)
-BuildRequires:	pkgconfig(libgnomeui-2.0)
+BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	pkgconfig(ncurses)
 BuildRequires:	pkgconfig(sdl2)
 BuildRequires:	pkgconfig(vte)
 BuildRequires:	pkgconfig(xt)
 BuildRequires:	pkgconfig(xxf86vm)
+BuildRequires:	pkgconfig(libpcap)
+BuildRequires:	xa
 Requires:	vice-binaries = %{EVRD}
 
 %description
@@ -35,7 +37,7 @@ VICE is a set of accurate emulators for the Commodore 64, 128, VIC20,
 PET and CBM-II 8-bit computers, all of which run under the X Window
 System.
 
-%files -f %{name}.lang
+%files
 %doc AUTHORS FEEDBACK INSTALL README ChangeLog
 %{_libdir}/vice
 %{_mandir}/man1/*
@@ -89,6 +91,7 @@ GTK set of vice emulators binaries.
 	--enable-ethernet \\\
 	--disable-arch \\\
 	--with-ui-threads \\\
+	--with-sdlsound \\\
 	--disable-option-checking
 
 
@@ -109,7 +112,7 @@ popd
 make clean
 
 %configure \
-	--enable-gnomeui \
+	--enable-native-gtk3ui \
 	%{common_args}
 %make
 
@@ -334,6 +337,3 @@ mkdir -p %{buildroot}%{_iconsdir}/hicolor/{16x16,32x32,48x48}/apps
 tar xjf %{SOURCE1} -C %{buildroot}%{_iconsdir}/hicolor/32x32/apps
 tar xjf %{SOURCE2} -C %{buildroot}%{_iconsdir}/hicolor/48x48/apps
 tar xjf %{SOURCE3} -C %{buildroot}%{_iconsdir}/hicolor/16x16/apps
-
-%find_lang %{name}
-
