@@ -30,6 +30,7 @@ BuildRequires:	pkgconfig(xt)
 BuildRequires:	pkgconfig(xxf86vm)
 BuildRequires:	pkgconfig(libpcap)
 BuildRequires:	xa
+BuildRequires:	byacc
 Requires:	vice-binaries = %{EVRD}
 
 %description
