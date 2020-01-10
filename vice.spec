@@ -80,7 +80,7 @@ GTK set of vice emulators binaries.
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 
 %build
 # --disable-option-checking is needed because the configure
