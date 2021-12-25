@@ -3,7 +3,7 @@
 
 Summary:	VICE, the Versatile Commodore Emulator
 Name:		vice
-Version:	3.5
+Version:	3.6
 Release:	1
 License:	GPLv2+
 Group:		Emulators
@@ -42,7 +42,7 @@ System.
 %doc README
 %doc %{_docdir}/vice
 %{_datadir}/vice
-%{_iconsdir}/hicolor/*/apps/*.png
+#{_iconsdir}/hicolor/*/apps/*.png
 
 #----------------------------------------------------------------------------
 
@@ -78,7 +78,7 @@ GTK set of vice emulators binaries.
 #----------------------------------------------------------------------------
 
 %prep
-%autosetup -p1
+%autosetup -p1 -n %{name}-%{version}.0
 # --disable-option-checking is needed because the configure
 # macro adds --disable-static, --disable-rpath and a few other
 # generic autoconf-isms
