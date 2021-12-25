@@ -3,15 +3,12 @@
 
 Summary:	VICE, the Versatile Commodore Emulator
 Name:		vice
-Version:	3.5
+Version:	3.6
 Release:	1
 License:	GPLv2+
 Group:		Emulators
 Url:		http://vice-emu.sourceforge.net/
 Source0:	https://downloads.sourceforge.net/project/vice-emu/releases/vice-%{version}.tar.gz
-Source1:	vice-normalicons.tar.bz2
-Source2:	vice-largeicons.tar.bz2
-Source3:	vice-miniicons.tar.bz2
 BuildRequires:	bdftopcf
 BuildRequires:	flex
 BuildRequires:	mkfontdir
@@ -42,7 +39,7 @@ System.
 %doc README
 %doc %{_docdir}/vice
 %{_datadir}/vice
-%{_iconsdir}/hicolor/*/apps/*.png
+%{_datadir}/icons/hicolor/*/apps/*
 
 #----------------------------------------------------------------------------
 
@@ -78,7 +75,7 @@ GTK set of vice emulators binaries.
 #----------------------------------------------------------------------------
 
 %prep
-%autosetup -p1
+%autosetup -p1 -n %{name}-%{version}.0
 # --disable-option-checking is needed because the configure
 # macro adds --disable-static, --disable-rpath and a few other
 # generic autoconf-isms
@@ -137,7 +134,7 @@ cat > %{buildroot}%{_datadir}/applications/mandriva-x64-sdl.desktop << EOF
 Name=C64 Emulator (SDL)
 Comment=Commodore 64 Emulator
 Exec=%{_bindir}/x64-sdl %U
-Icon=c64icon
+Icon=C64_1024
 Terminal=false
 Type=Application
 MimeType=application/x-d64;application/x-t64;application/x-x64;
@@ -150,7 +147,7 @@ cat > %{buildroot}%{_datadir}/applications/mandriva-x128-sdl.desktop << EOF
 Name=C128 Emulator (SDL)
 Comment=Commodore 128 Emulator
 Exec=%{_bindir}/x128-sdl %U
-Icon=c128icon
+Icon=C128_1024
 Terminal=false
 Type=Application
 MimeType=application/x-d64;application/x-t64;application/x-x64;
@@ -163,7 +160,7 @@ cat > %{buildroot}%{_datadir}/applications/mandriva-xpet-sdl.desktop << EOF
 Name=PET Emulator (SDL)
 Comment=Commodore PET Emulator
 Exec=%{_bindir}/xpet-sdl %U
-Icon=peticon
+Icon=PET_256
 Terminal=false
 Type=Application
 MimeType=application/x-d64;application/x-t64;application/x-x64;
@@ -176,7 +173,7 @@ cat > %{buildroot}%{_datadir}/applications/mandriva-xvic-sdl.desktop << EOF
 Name=VIC 20 Emulator (SDL)
 Comment=Commodore VIC 20 Emulator
 Exec=%{_bindir}/xvic-sdl %U
-Icon=vic20icon
+Icon=VIC20_1024
 Terminal=false
 Type=Application
 MimeType=application/x-d64;application/x-t64;application/x-x64;
@@ -189,7 +186,7 @@ cat > %{buildroot}%{_datadir}/applications/mandriva-xcbm2-sdl.desktop << EOF
 Name=CBM2 Emulator (SDL)
 Comment=Commodore BM 2 Emulator
 Exec=%{_bindir}/xcbm2-sdl %U
-Icon=c610icon
+Icon=CBM2_1024
 Terminal=false
 Type=Application
 MimeType=application/x-d64;application/x-t64;application/x-x64;
@@ -202,7 +199,7 @@ cat > %{buildroot}%{_datadir}/applications/mandriva-xplus4-sdl.desktop << EOF
 Name=CPLUS4 Emulator (SDL)
 Comment=Commodore PLUS4 Emulator
 Exec=%{_bindir}/xplus4-sdl %U
-Icon=plus4icon
+Icon=Plus4_1024
 Terminal=false
 Type=Application
 MimeType=application/x-d64;application/x-t64;application/x-x64;
@@ -215,7 +212,7 @@ cat > %{buildroot}%{_datadir}/applications/mandriva-c1541-sdl.desktop << EOF
 Name=VICE disk image tool (SDL)
 Comment=C1541 stand alone disk image maintenance program
 Exec=%{_bindir}/c1541-sdl %U
-Icon=commodore
+Icon=CBM_Logo
 Terminal=true
 Type=Application
 StartupNotify=true
@@ -227,7 +224,7 @@ cat > %{buildroot}%{_datadir}/applications/mandriva-vsid-sdl.desktop << EOF
 Name=VSID music player (SDL)
 Comment=VICE SID music player for Commodore tunes
 Exec=%{_bindir}/vsid-sdl %U
-Icon=commodore
+Icon=SID_1024
 Terminal=false
 Type=Application
 StartupNotify=true
@@ -235,8 +232,6 @@ Categories=Audio;Player;
 EOF
 #============SDL============
 
-#install icons
-mkdir -p %{buildroot}%{_iconsdir}/hicolor/{16x16,32x32,48x48}/apps
-tar xjf %{SOURCE1} -C %{buildroot}%{_iconsdir}/hicolor/32x32/apps
-tar xjf %{SOURCE2} -C %{buildroot}%{_iconsdir}/hicolor/48x48/apps
-tar xjf %{SOURCE3} -C %{buildroot}%{_iconsdir}/hicolor/16x16/apps
+# Install icons for the desktop files
+mkdir -p %{buildroot}%{_datadir}/icons/hicolor/scalable/apps/
+cp data/common/*.svg %{buildroot}%{_datadir}/icons/hicolor/scalable/apps/
