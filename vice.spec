@@ -12,6 +12,7 @@ Source0:	https://downloads.sourceforge.net/project/vice-emu/releases/vice-%{vers
 BuildRequires:	bdftopcf
 BuildRequires:	flex
 BuildRequires:	mkfontdir
+BuildRequires:	dos2unix
 BuildRequires:	gettext-devel
 BuildRequires:	giflib-devel
 BuildRequires:	ffmpeg-devel
