@@ -19,6 +19,8 @@ BuildRequires:	giflib-devel
 BuildRequires:	ffmpeg-devel
 BuildRequires:	readline-devel
 BuildRequires:	SDL_sound-devel
+BuildRequires:	pkgconfig(ogg)
+BuildRequires:	pkgconfig(vorbis)
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(gdkglext-1.0)
 BuildRequires:	pkgconfig(gtk+-3.0)
