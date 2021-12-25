@@ -19,6 +19,8 @@ BuildRequires:	giflib-devel
 BuildRequires:	ffmpeg-devel
 BuildRequires:	readline-devel
 BuildRequires:	SDL_sound-devel
+BuildRequires:	pkgconfig(portaudio-2.0)
+BuildRequires:	pkgconfig(libmpg123)
 BuildRequires:	pkgconfig(ogg)
 BuildRequires:	pkgconfig(vorbis)
 BuildRequires:	pkgconfig(flac)
