@@ -21,6 +21,7 @@ BuildRequires:	readline-devel
 BuildRequires:	SDL_sound-devel
 BuildRequires:	pkgconfig(ogg)
 BuildRequires:	pkgconfig(vorbis)
+BuildRequires:	pkgconfig(flac)
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	pkgconfig(gdkglext-1.0)
 BuildRequires:	pkgconfig(gtk+-3.0)
