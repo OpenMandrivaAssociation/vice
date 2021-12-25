@@ -14,6 +14,7 @@ BuildRequires:	flex
 BuildRequires:	mkfontdir
 BuildRequires:	dos2unix
 BuildRequires:	gettext-devel
+BuildRequires:	lame-devel
 BuildRequires:	giflib-devel
 BuildRequires:	ffmpeg-devel
 BuildRequires:	readline-devel
