@@ -19,6 +19,7 @@ BuildRequires:	giflib-devel
 BuildRequires:	ffmpeg-devel
 BuildRequires:	readline-devel
 BuildRequires:	SDL_sound-devel
+BuildRequires:	xdg-utils
 BuildRequires:	pkgconfig(glew)
 BuildRequires:	pkgconfig(portaudio-2.0)
 BuildRequires:	pkgconfig(libmpg123)
