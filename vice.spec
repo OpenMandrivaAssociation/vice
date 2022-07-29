@@ -85,7 +85,7 @@ GTK set of vice emulators binaries.
 #----------------------------------------------------------------------------
 
 %prep
-%autosetup -p1 -n %{name}-%{version}.0
+%autosetup -p1 -n %{name}-%{version}
 # --disable-option-checking is needed because the configure
 # macro adds --disable-static, --disable-rpath and a few other
 # generic autoconf-isms
