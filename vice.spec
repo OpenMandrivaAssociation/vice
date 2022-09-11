@@ -1,10 +1,11 @@
 %define Werror_cflags %nil
 %define _disable_rebuild_configure 1
+%define debug_package %{nil}
 
 Summary:	VICE, the Versatile Commodore Emulator
 Name:		vice
 Version:	3.6.1
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		Emulators
 Url:		http://vice-emu.sourceforge.net/
@@ -46,7 +47,6 @@ PET and CBM-II 8-bit computers, all of which run under the X Window
 System.
 
 %files
-%doc README
 %doc %{_docdir}/vice
 %{_datadir}/vice
 %{_datadir}/icons/hicolor/*/apps/*
@@ -91,7 +91,7 @@ GTK set of vice emulators binaries.
 # generic autoconf-isms
 %define common_args \\\
 	--enable-fullscreen \\\
-	--enable-external-ffmpeg \\\
+	--disable-external-ffmpeg \\\
 	--enable-ethernet \\\
 	--with-ui-threads \\\
 	--with-sdlsound \\\
