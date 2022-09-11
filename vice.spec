@@ -39,6 +39,7 @@ BuildRequires:	pkgconfig(libpcap)
 BuildRequires:	pkgconfig(libpulse-simple)
 BuildRequires:	xa
 BuildRequires:	byacc
+BuildRequires:	locales-extra-charsets
 Requires:	vice-binaries = %{EVRD}
 
 %description
