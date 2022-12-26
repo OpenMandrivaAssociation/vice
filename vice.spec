@@ -4,8 +4,8 @@
 
 Summary:	VICE, the Versatile Commodore Emulator
 Name:		vice
-Version:	3.6.1
-Release:	2
+Version:	3.7
+Release:	1
 License:	GPLv2+
 Group:		Emulators
 Url:		http://vice-emu.sourceforge.net/
@@ -17,7 +17,6 @@ BuildRequires:	dos2unix
 BuildRequires:	gettext-devel
 BuildRequires:	lame-devel
 BuildRequires:	giflib-devel
-BuildRequires:	ffmpeg-devel
 BuildRequires:	readline-devel
 BuildRequires:	SDL_sound-devel
 BuildRequires:	xdg-utils
@@ -92,11 +91,12 @@ GTK set of vice emulators binaries.
 # generic autoconf-isms
 %define common_args \\\
 	--enable-fullscreen \\\
-	--disable-external-ffmpeg \\\
+	--disable-ffmpeg \\\
 	--enable-ethernet \\\
 	--with-ui-threads \\\
 	--with-sdlsound \\\
 	--disable-pdf-docs \\\
+	--disable-sdl1ui \\\
 	--enable-lame \\\
 	--enable-midi \\\
 	--enable-cpuhistory \\\
@@ -114,16 +114,18 @@ mkdir sdl
 cd sdl
 %configure \
 	%{common_args} \
-	--enable-sdlui2
+	--enable-sdl2ui
 cd ..
 
 mkdir gtk
 cd gtk
 %configure \
 	%{common_args} \
-	--enable-native-gtk3ui \
+	--enable-gtk3ui \
 	--enable-desktop-files
+find . -name Makefile |xargs sed -i -e 's,-lOpenGL,-lOpenGL -lGLX,'
 cd ..
+
 
 %build
 %make_build -C sdl
