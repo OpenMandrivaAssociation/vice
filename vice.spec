@@ -8,7 +8,7 @@ Version:	3.8
 Release:	1
 License:	GPLv2+
 Group:		Emulators
-Url:		http://vice-emu.sourceforge.net/
+Url:		https://vice-emu.sourceforge.net/
 Source0:	https://downloads.sourceforge.net/project/vice-emu/releases/vice-%{version}.tar.gz
 BuildRequires:	bdftopcf
 BuildRequires:	flex
