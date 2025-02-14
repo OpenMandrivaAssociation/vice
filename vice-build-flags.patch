@@ -1,0 +1,34 @@
+diff --git a/configure.ac b/configure.ac
+index 986fad5..fec5cff 100755
+--- a/configure.ac
++++ b/configure.ac
+@@ -557,7 +557,7 @@ fi
+ 
+ 
+ old_CFLAGS="$CFLAGS"
+-CFLAGS="$VICE_CFLAGS"
++#CFLAGS="$VICE_CFLAGS"
+ dnl Do these checks before any Gtk3 flags are added
+ AC_MSG_CHECKING(for time_t in time.h)
+ AC_CACHE_VAL(bu_cv_decl_time_t_time_h,
+diff --git a/src/resid-dtv/configure.in b/src/resid-dtv/configure.in
+index ee9668f..840eb17 100755
+--- a/src/resid-dtv/configure.in
++++ b/src/resid-dtv/configure.in
+@@ -40,13 +40,14 @@ AC_PROG_CXX([c++ g++ clang++])
+ dnl Set CXXFLAGS for g++. Use -fno-exceptions if supported.
+ if test "$GXX" = yes; then
+   if test "$ac_test_CXXFLAGS" != set; then
+-    CXXFLAGS="-g -Wall -O2 -funroll-loops -fomit-frame-pointer -fno-exceptions"
++    old_CXXFLAGS="$CXXFLAGS"
++    CXXFLAGS="$CXXFLAGS -funroll-loops -fomit-frame-pointer -fno-exceptions"
+     AC_MSG_CHECKING([whether the C++ compiler ($CXX $CXXFLAGS $LDFLAGS) works])
+     AC_TRY_COMPILE([],
+                    [int test;],
+                    [ AC_MSG_RESULT(yes) ],
+                    [ AC_MSG_RESULT(no)
+-                     CXXFLAGS="-g -Wall -O2 -funroll-loops -fomit-frame-pointer"
++                     CXXFLAGS="$old_CXXFLAGS -funroll-loops -fomit-frame-pointer"
+                      ])
+   fi
+ fi
