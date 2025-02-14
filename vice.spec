@@ -4,8 +4,8 @@
 
 Summary:	VICE, the Versatile Commodore Emulator
 Name:		vice
-Version:	3.8
-Release:	2
+Version:	3.9
+Release:	1
 License:	GPLv2+
 Group:		Emulators
 Url:		https://vice-emu.sourceforge.net/
@@ -22,6 +22,7 @@ BuildRequires:	SDL_sound-devel
 BuildRequires:	xdg-utils
 BuildRequires:	pkgconfig(glew)
 BuildRequires:	pkgconfig(portaudio-2.0)
+BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	pkgconfig(libmpg123)
 BuildRequires:	pkgconfig(ogg)
 BuildRequires:	pkgconfig(vorbis)
