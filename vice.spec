@@ -130,6 +130,8 @@ cd ..
 
 
 %build
+export CFLAGS="-fcommon"
+export CXXFLAGS="-fcommon"
 %make_build -C sdl
 %make_build -C gtk
 
