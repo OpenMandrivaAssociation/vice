@@ -1,111 +1,6 @@
---- a/trunk/vice/src/Makefile.am
-+++ b/trunk/vice/src/Makefile.am
-@@ -594,6 +594,7 @@
- resid_lib = $(top_builddir)/src/resid/libresid.a
- resid_dtv_lib = $(top_builddir)/src/resid-dtv/libresiddtv.a
- rs232drv_lib = $(top_builddir)/src/rs232drv/librs232drv.a
-+rs232drvpet_lib = $(top_builddir)/src/rs232drv/librs232drvpet.a
- raster_lib = $(top_builddir)/src/raster/libraster.a
- rtc_lib = $(top_builddir)/src/core/rtc/librtc.a
- samplerdrv_lib = $(top_builddir)/src/samplerdrv/libsamplerdrv.a
-@@ -631,7 +632,7 @@
- # external libraries required for all emulators
- emu_extlibs = @UI_LIBS@ @SDL_EXTRA_LIBS@ @SOUND_LIBS@ @JOY_LIBS@ @GFXOUTPUT_LIBS@ @ZLIB_LIBS@ @DYNLIB_LIBS@ @ARCH_LIBS@ $(archdep_lib) $(linenoise_ng_lib)
- 
--driver_libs = $(joyport_lib) $(samplerdrv_lib) $(sounddrv_lib) $(mididrv_lib) $(socketdrv_lib) $(hwsiddrv_lib) $(gfxoutputdrv_lib) $(printerdrv_lib) $(rs232drv_lib) $(diskimage_lib) $(fsdevice_lib) $(tape_lib) $(fileio_lib) $(serial_lib) $(core_lib)
-+driver_libs = $(joyport_lib) $(samplerdrv_lib) $(sounddrv_lib) $(mididrv_lib) $(socketdrv_lib) $(hwsiddrv_lib) $(gfxoutputdrv_lib) $(printerdrv_lib) $(diskimage_lib) $(fsdevice_lib) $(tape_lib) $(fileio_lib) $(serial_lib) $(core_lib)
- 
- if SUPPORT_X64
- x64_bin = x64
-@@ -716,6 +717,7 @@
- 	$(sid_lib) \
- 	$(monitor_lib) \
- 	$(driver_libs) \
-+	$(rs232drv_lib) \
- 	$(vicii_lib) \
- 	$(raster_lib) \
- 	$(userport_lib) \
-@@ -773,6 +775,7 @@
- 	$(sid_lib) \
- 	$(monitor_lib) \
- 	$(driver_libs) \
-+	$(rs232drv_lib) \
- 	$(viciisc_lib) \
- 	$(raster_lib) \
- 	$(userport_lib) \
-@@ -895,6 +898,7 @@
- 	$(sid_lib) \
- 	$(monitor_lib) \
- 	$(driver_libs) \
-+	$(rs232drv_lib) \
- 	$(viciisc_lib) \
- 	$(raster_lib) \
- 	$(userport_lib) \
-@@ -954,6 +958,7 @@
- 	$(sid_lib) \
- 	$(monitor_lib) \
- 	$(driver_libs) \
-+	$(rs232drv_lib) \
- 	$(vicii_lib) \
- 	$(vdc_lib) \
- 	$(raster_lib) \
-@@ -1011,6 +1016,7 @@
- 	$(monitor_lib) \
- 	$(sid_lib) \
- 	$(driver_libs) \
-+	$(rs232drv_lib) \
- 	$(raster_lib) \
- 	$(userport_lib) \
- 	$(diag_lib) \
-@@ -1063,6 +1069,7 @@
- 	$(monitor_lib) \
- 	$(sid_lib) \
- 	$(driver_libs) \
-+	$(rs232drvpet_lib) \
- 	$(crtc_lib) \
- 	$(raster_lib) \
- 	$(video_lib) \
-@@ -1122,6 +1129,7 @@
- 	$(monitor_lib) \
- 	$(sid_lib) \
- 	$(driver_libs) \
-+	$(rs232drv_lib) \
- 	$(raster_lib) \
- 	$(rtc_lib) \
- 	$(video_lib) \
-@@ -1180,6 +1188,7 @@
- 	$(monitor_lib) \
- 	$(sid_lib) \
- 	$(driver_libs) \
-+	$(rs232drvpet_lib) \
- 	$(crtc_lib) \
- 	$(raster_lib) \
- 	$(video_lib) \
-@@ -1236,6 +1245,7 @@
- 	$(xcbm5x0_lib) \
- 	$(sid_lib) \
- 	$(driver_libs) \
-+	$(rs232drv_lib) \
- 	$(vicii_lib) \
- 	$(raster_lib) \
- 	$(rtc_lib) \
-@@ -1540,8 +1550,11 @@
- 	@echo "making all in printerdrv"
- 	@(cd printerdrv && $(MAKE))
- $(rs232drv_lib):
--	@echo "making all in rs232drv"
--	@(cd rs232drv && $(MAKE))
-+	@echo "making librs232drv.a in rs232drv"
-+	@(cd rs232drv && $(MAKE) librs232drv.a)
-+$(rs232drvpet_lib):
-+	@echo "making librs232drvpet.a in rs232drv"
-+	@(cd rs232drv && $(MAKE) librs232drvpet.a)
- $(raster_lib):
- 	@echo "making libraster.a in raster"
- 	@(cd raster && $(MAKE) libraster.a)
-
---- a/trunk/vice/src/c64/Makefile.am
-+++ b/trunk/vice/src/c64/Makefile.am
+diff -uraN vice-3.9/src/c64/Makefile.am omv-vice-3.9/src/c64/Makefile.am
+--- vice-3.9/src/c64/Makefile.am	2024-12-24 20:12:44.000000000 +0100
++++ omv-vice-3.9/src/c64/Makefile.am	2025-02-14 20:16:43.619355509 +0100
 @@ -216,8 +216,6 @@
  	c64fastiec.h \
  	c64keyboard.c \
@@ -115,9 +10,9 @@
  	c64rom.c \
  	c64rom.h \
  	c64romset.c \
-
---- a/trunk/vice/src/c64dtv/c64dtv.c
-+++ b/trunk/vice/src/c64dtv/c64dtv.c
+diff -uraN vice-3.9/src/c64dtv/c64dtv.c omv-vice-3.9/src/c64dtv/c64dtv.c
+--- vice-3.9/src/c64dtv/c64dtv.c	2024-12-24 20:12:44.000000000 +0100
++++ omv-vice-3.9/src/c64dtv/c64dtv.c	2025-02-14 20:20:56.660823334 +0100
 @@ -89,7 +89,6 @@
  #include "protopad.h"
  #include "ps2mouse.h"
@@ -143,7 +38,7 @@
      flash_trap_resources_shutdown();
      c64dtv_resources_shutdown();
      c64dtvmem_resources_shutdown();
-+#if 0
++$if 0
      rs232drv_resources_shutdown();
 +#endif
      printer_resources_shutdown();
@@ -153,7 +48,7 @@
          init_cmdline_options_fail("sid");
          return -1;
      }
-+#if 0
++3if 0
      if (rs232drv_cmdline_options_init() < 0) {
          init_cmdline_options_fail("rs232drv");
          return -1;
@@ -184,9 +79,123 @@
      printer_reset();
  
      /* FIXME */
-
---- a/trunk/vice/src/rs232drv/Makefile.am
-+++ b/trunk/vice/src/rs232drv/Makefile.am
+diff -uraN vice-3.9/src/Makefile.am omv-vice-3.9/src/Makefile.am
+--- vice-3.9/src/Makefile.am	2024-12-24 20:12:44.000000000 +0100
++++ omv-vice-3.9/src/Makefile.am	2025-02-14 20:14:45.647534925 +0100
+@@ -594,6 +594,7 @@
+ resid_lib = $(top_builddir)/src/resid/libresid.a
+ resid_dtv_lib = $(top_builddir)/src/resid-dtv/libresiddtv.a
+ rs232drv_lib = $(top_builddir)/src/rs232drv/librs232drv.a
++rs232drvpet_lib = $(top_builddir)/src/rs232drv/librs232drvpet.a
+ raster_lib = $(top_builddir)/src/raster/libraster.a
+ rtc_lib = $(top_builddir)/src/core/rtc/librtc.a
+ samplerdrv_lib = $(top_builddir)/src/samplerdrv/libsamplerdrv.a
+@@ -631,7 +632,7 @@
+ # external libraries required for all emulators
+ emu_extlibs = @UI_LIBS@ @SDL_EXTRA_LIBS@ @SOUND_LIBS@ @JOY_LIBS@ @GFXOUTPUT_LIBS@ @ZLIB_LIBS@ @DYNLIB_LIBS@ @ARCH_LIBS@ $(archdep_lib) $(linenoise_ng_lib)
+ 
+-driver_libs = $(joyport_lib) $(samplerdrv_lib) $(sounddrv_lib) $(mididrv_lib) $(socketdrv_lib) $(hwsiddrv_lib) $(gfxoutputdrv_lib) $(printerdrv_lib) $(rs232drv_lib) $(diskimage_lib) $(fsdevice_lib) $(tape_lib) $(fileio_lib) $(serial_lib) $(core_lib)
++driver_libs = $(joyport_lib) $(samplerdrv_lib) $(sounddrv_lib) $(mididrv_lib) $(socketdrv_lib) $(hwsiddrv_lib) $(gfxoutputdrv_lib) $(printerdrv_lib) $(diskimage_lib) $(fsdevice_lib) $(tape_lib) $(fileio_lib) $(serial_lib) $(core_lib)
+ 
+ if SUPPORT_X64
+ x64_bin = x64
+@@ -716,6 +717,7 @@
+ 	$(sid_lib) \
+ 	$(monitor_lib) \
+ 	$(driver_libs) \
++    $(rs232drv_lib) \
+ 	$(vicii_lib) \
+ 	$(raster_lib) \
+ 	$(userport_lib) \
+@@ -773,6 +775,7 @@
+ 	$(sid_lib) \
+ 	$(monitor_lib) \
+ 	$(driver_libs) \
++    $(rs232drv_lib) \
+ 	$(viciisc_lib) \
+ 	$(raster_lib) \
+ 	$(userport_lib) \
+@@ -835,6 +838,7 @@
+ 	$(sid_dtv_lib) \
+ 	$(monitor_lib) \
+ 	$(driver_libs) \
++    $(rs232drv_lib) \
+ 	$(viciidtv_lib) \
+ 	$(raster_lib) \
+ 	$(video_lib) \
+@@ -895,6 +899,7 @@
+ 	$(sid_lib) \
+ 	$(monitor_lib) \
+ 	$(driver_libs) \
++    $(rs232drv_lib) \
+ 	$(viciisc_lib) \
+ 	$(raster_lib) \
+ 	$(userport_lib) \
+@@ -954,6 +959,7 @@
+ 	$(sid_lib) \
+ 	$(monitor_lib) \
+ 	$(driver_libs) \
++    $(rs232drv_lib) \
+ 	$(vicii_lib) \
+ 	$(vdc_lib) \
+ 	$(raster_lib) \
+@@ -1011,6 +1017,7 @@
+ 	$(monitor_lib) \
+ 	$(sid_lib) \
+ 	$(driver_libs) \
++    $(rs232drv_lib) \
+ 	$(raster_lib) \
+ 	$(userport_lib) \
+ 	$(diag_lib) \
+@@ -1063,6 +1070,7 @@
+ 	$(monitor_lib) \
+ 	$(sid_lib) \
+ 	$(driver_libs) \
++    $(rs232drvpet_lib) \
+ 	$(crtc_lib) \
+ 	$(raster_lib) \
+ 	$(video_lib) \
+@@ -1122,6 +1130,7 @@
+ 	$(monitor_lib) \
+ 	$(sid_lib) \
+ 	$(driver_libs) \
++    $(rs232drv_lib) \
+ 	$(raster_lib) \
+ 	$(rtc_lib) \
+ 	$(video_lib) \
+@@ -1180,6 +1189,7 @@
+ 	$(monitor_lib) \
+ 	$(sid_lib) \
+ 	$(driver_libs) \
++    $(rs232drvpet_lib) \
+ 	$(crtc_lib) \
+ 	$(raster_lib) \
+ 	$(video_lib) \
+@@ -1236,6 +1246,7 @@
+ 	$(xcbm5x0_lib) \
+ 	$(sid_lib) \
+ 	$(driver_libs) \
++    $(rs232drv_lib) \
+ 	$(vicii_lib) \
+ 	$(raster_lib) \
+ 	$(rtc_lib) \
+@@ -1540,8 +1551,11 @@
+ 	@echo "making all in printerdrv"
+ 	@(cd printerdrv && $(MAKE))
+ $(rs232drv_lib):
+-	@echo "making all in rs232drv"
+-	@(cd rs232drv && $(MAKE))
++	@echo "making librs232drv.a in rs232drv"
++	@(cd rs232drv && $(MAKE) librs232drv.a)
++$(rs232drvpet_lib):
++	@echo "making librs232drvpet.a in rs232drv"
++	@(cd rs232drv && $(MAKE) librs232drvpet.a)
+ $(raster_lib):
+ 	@echo "making libraster.a in raster"
+ 	@(cd raster && $(MAKE) libraster.a)
+diff -uraN vice-3.9/src/rs232drv/Makefile.am omv-vice-3.9/src/rs232drv/Makefile.am
+--- vice-3.9/src/rs232drv/Makefile.am	2024-12-24 20:12:44.000000000 +0100
++++ omv-vice-3.9/src/rs232drv/Makefile.am	2025-02-14 20:22:18.207175951 +0100
 @@ -14,7 +14,7 @@
  AM_LDFLAGS = @VICE_LDFLAGS@
  
