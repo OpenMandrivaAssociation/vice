@@ -2,6 +2,8 @@
 %define _disable_rebuild_configure 1
 %define debug_package %{nil}
 
+%global optflags %{optflags} -Wl,--allow-multiple-definition
+
 Summary:	VICE, the Versatile Commodore Emulator
 Name:		vice
 Version:	3.9
