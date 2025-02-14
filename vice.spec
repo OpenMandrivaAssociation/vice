@@ -23,6 +23,7 @@ BuildRequires:	xdg-utils
 BuildRequires:	pkgconfig(glew)
 BuildRequires:	pkgconfig(portaudio-2.0)
 BuildRequires:	pkgconfig(libcurl)
+BuildRequires:	pkgconfig(libevdev)
 BuildRequires:	pkgconfig(libmpg123)
 BuildRequires:	pkgconfig(ogg)
 BuildRequires:	pkgconfig(vorbis)
