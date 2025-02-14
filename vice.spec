@@ -13,6 +13,7 @@ Group:		Emulators
 Url:		https://vice-emu.sourceforge.net/
 Source0:	https://downloads.sourceforge.net/project/vice-emu/releases/vice-%{version}.tar.gz
 Patch0:		vice-build-flags.patch
+Patch1:		fix-duplicate-symbols.patch
 BuildRequires:	bdftopcf
 BuildRequires:	flex
 BuildRequires:	mkfontdir
