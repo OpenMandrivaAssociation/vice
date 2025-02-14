@@ -36,6 +36,7 @@ BuildRequires:	pkgconfig(xt)
 BuildRequires:	pkgconfig(xxf86vm)
 BuildRequires:	pkgconfig(libpcap)
 BuildRequires:	pkgconfig(libpulse-simple)
+BuildRequires:	pkgconfig(libcurl)
 BuildRequires:	xa
 BuildRequires:	byacc
 BuildRequires:	locales-extra-charsets
