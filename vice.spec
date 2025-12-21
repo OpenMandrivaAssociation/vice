@@ -10,6 +10,11 @@ License:	GPLv2+
 Group:		Emulators
 Url:		https://vice-emu.sourceforge.net/
 Source0:	https://downloads.sourceforge.net/project/vice-emu/releases/vice-%{version}.tar.gz
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	bdftopcf
 BuildRequires:	flex
 BuildRequires:	mkfontdir
